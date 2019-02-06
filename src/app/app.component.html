@@ -1,0 +1,45 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="main-ctnr">
+  Type tags here using comma, semicolor and line break as delimeters: 
+  <br>
+  <textarea  [(ngModel)]="tagsStr" rows="7" cols="60" type="text" class="md-textarea" ></textarea>
+  <br>
+  <button (click)="onAddClick()" type="button" class="btn btn-primary">Add tags</button>
+  <div class="tags-ctnr">
+    <ul class="tag-ul-list">
+      <li *ngFor="let tag of tags; let i = index" class="tag-list-item" [ngStyle]="tag >= 0?{'background-color': '#ff9999'} : {'background-color': '#b2b2ff'}" >
+        {{tag}}
+          <button (click)="onDeleteTag(i)" type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </li>
+    </ul>
+  </div>
+  <br>
+  <button (click)="onEditTagClick(content)" type="button" class="btn btn-primary">Edit tags</button>
+</div>
+
+<!-- Edit tags dialog -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Tags</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <br>
+    <textarea  [(ngModel)]="tagsStr" rows="7" cols="60" type="text" class="md-textarea" ></textarea>
+    <br>
+    <div class="tags-ctnr">
+      <ul class="tag-ul-list">
+        <li *ngFor="let tag of tags; let i = index" class="tag-list-item" [ngStyle]="tag >= 0?{'background-color': '#ff9999'} : {'background-color': '#b2b2ff'}" >
+          {{tag}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>

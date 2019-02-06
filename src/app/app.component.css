@@ -1,0 +1,38 @@
+.main-ctnr{
+    margin-top: 20px;
+    margin-left: 40px; 
+}
+
+.tags-ctnr{
+    height: 150px;
+    width : 440px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    background: #cccccc58;
+    margin-top: 20px;
+    overflow-y: scroll;
+}
+
+.tag-ul-list{
+    list-style: none;
+    padding: 0;
+}
+
+.tag-list-item{
+    min-width: 50px;
+    background: yellow;
+    border-radius: 5px;
+    text-align: center;
+    margin: 2px;
+    float: left;
+    padding: 3px 6px;
+}
+
+.close{
+    font-size: 1.3rem;
+    padding-left: 3px;
+}
+
+button:focus{
+    outline: none;
+}
