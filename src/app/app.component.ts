@@ -21,8 +21,8 @@ export class AppComponent {
     this.tags = [];
     let tags = this.tagsStr.replace(/[\n,;]/g, ',').split(",");
     tags.forEach(element => {
-      let num = parseFloat(element);
-      !isNaN(+element) && this.tags.push(num)
+      let isBlank = /^\s*$/.test(element);
+      !isBlank && !isNaN(+element) && this.tags.push(+element)
     });
 
     localStorage.setItem('tags', JSON.stringify(this.tags));
