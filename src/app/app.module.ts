@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
+import { ChatSmallBoxComponent } from './chat-small-box/chat-small-box.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChatSmallBoxComponent
   ],
   imports: [
     BrowserModule,

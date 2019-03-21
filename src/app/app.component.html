@@ -1,4 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<app-chat-small-box  *ngFor="let chatBox of chatBoxes" [chatBox]="chatBox" [leftPosition]="leftPosition" (onClose)="onClose($event)" ></app-chat-small-box>
+<button (click)="addChatBox()" type="button" class="close" aria-label="Add Chat box">
+  <span aria-hidden="true">&times;</span>
+</button>
 <div class="main-ctnr">
   Type tags here using comma, semicolor and line break as delimeters: 
   <br>
