@@ -38,3 +38,11 @@ $bg: yellow;
 button:focus{
     outline: none;
 }
+
+.chat-small-box-cntr{
+    border: 1px solid blue;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+}

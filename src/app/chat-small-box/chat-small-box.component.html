@@ -1,12 +1,14 @@
-<div [style.right]="leftPositionStr" class="chat-box-main">
-  <div (click)="minimize()" style="height: 40px;width: 100%;background: blue">
-    <button (click)="close()" type="button" class="close" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div *ngIf="showBody" style="height: 300px;width: 100%">
-    chat-small-box works! {{chatBox}}
+<div class="chat-box-main-cntr">
+  <div class="chat-box-main">
+    <div (click)="minimize()" style="height: 40px;width: 100%;background: blue">
+      <button (click)="close()" type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div *ngIf="showBody" style="height: 300px;width: 100%">
+      chat-small-box works! {{chatBox}}
+
+    </div>
 
   </div>
-
 </div>

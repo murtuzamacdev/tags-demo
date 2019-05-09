@@ -5,11 +5,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { ChatSmallBoxComponent } from './chat-small-box/chat-small-box.component';
+import { PersonalizePipe } from './personalize.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChatSmallBoxComponent
+    ChatSmallBoxComponent,
+    PersonalizePipe
   ],
   imports: [
     BrowserModule,

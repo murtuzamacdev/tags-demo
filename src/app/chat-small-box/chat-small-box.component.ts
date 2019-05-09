@@ -11,6 +11,7 @@ export class ChatSmallBoxComponent implements OnInit {
   @Input() chatBox;
   @Input() leftPosition;
   @Output() onClose = new EventEmitter;
+  tempPos: string;
   showBody = true;
 
   leftPositionStr: any;
@@ -18,13 +19,18 @@ export class ChatSmallBoxComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.leftPositionStr = this.leftPosition + 'px'
+    this.leftPositionStr = this.leftPosition + 'px';
+    this.tempPos = this.leftPosition.toString();
   }
 
   ngOnDestroy() { }
 
   close() {
-    this.onClose.emit(this.chatBox);
+    let x = +this.leftPosition
+    this.onClose.emit({
+      a: this.chatBox,
+      b:  this.tempPos
+    });
   }
 
   minimize() {

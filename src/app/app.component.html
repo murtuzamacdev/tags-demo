@@ -1,27 +1,70 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<app-chat-small-box  *ngFor="let chatBox of chatBoxes" [chatBox]="chatBox" [leftPosition]="leftPosition" (onClose)="onClose($event)" ></app-chat-small-box>
+<meta property="video" content="https://stackoverflow.com/questions/7524585/how-do-i-get-the-information-from-a-meta-tag-with-javascript" />
+<input type="button" value="CPTURE" (click)="generatePDF()" />
+<div *ngIf="showPDF">
+  <table id="contentToConvert">
+    <tr>
+      <th>Column1</th>
+      <th>Column2</th>
+      <th>Column3</th>
+    </tr>
+    <tr>
+      <td>Row 1</td>
+      <td>Row 1</td>
+      <td>Row 1</td>
+    </tr>
+    <tr>
+      <td>Row 2</td>
+      <td>Row 2</td>
+      <td>Row 2</td>
+    </tr>
+    <tr>
+      <td>Row 3</td>
+      <td>Row 3</td>
+      <td>Row 3</td>
+    </tr>
+    <tr>
+      <td>Row 4</td>
+      <td>Row 4</td>
+      <td>Row 4</td>
+    </tr>
+  </table>
+</div>
+<h1 *ngIf="showPDF">{{greeting | personalize: 'Murtuza'}}</h1>
+
+<input id="textareaid111" (ngModelChange)="greeting=$event" [ngModel]="greeting | personalize: 'Murtuza'" style="width: 500px;">
+<button (click)="insertAtCaret('textareaid111', '___')" >Persnalize</button>
+<button (click)="setPersonalize()">Set Persnalize </button>
+
+
+<div class="chat-small-box-cntr">
+  <app-chat-small-box *ngFor="let chatBox of chatBoxes" [chatBox]="chatBox" [leftPosition]="leftPosition" (onClose)="onClose($event)"></app-chat-small-box>
+</div>
+
+
 <button (click)="addChatBox()" type="button" class="close" aria-label="Add Chat box">
   <span aria-hidden="true">&times;</span>
 </button>
 <div class="main-ctnr">
-  Type tags here using comma, semicolor and line break as delimeters: 
+  Type tags here using comma, semicolor and line break as delimeters:
   <br>
-  <textarea  [(ngModel)]="tagsStr" rows="7" cols="60" type="text" class="md-textarea" ></textarea>
+  <textarea [(ngModel)]="tagsStr" rows="7" cols="60" type="text" class="md-textarea"></textarea>
   <br>
   <button (click)="onAddClick()" type="button" class="btn btn-primary">Add tags</button>
   <div class="tags-ctnr">
     <ul class="tag-ul-list">
-      <li *ngFor="let tag of tags; let i = index" class="tag-list-item" [ngStyle]="tag >= 0?{'background-color': '#ff9999'} : {'background-color': '#b2b2ff'}" >
+      <li *ngFor="let tag of tags; let i = index" class="tag-list-item" [ngStyle]="tag >= 0?{'background-color': '#ff9999'} : {'background-color': '#b2b2ff'}">
         {{tag}}
-          <button (click)="onDeleteTag(i)" type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <button (click)="onDeleteTag(i)" type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </li>
     </ul>
   </div>
   <br>
   <button (click)="onEditTagClick(content)" type="button" class="btn btn-primary">Edit tags</button>
 </div>
+
 
 <!-- Edit tags dialog -->
 <ng-template #content let-modal>
@@ -33,11 +76,11 @@
   </div>
   <div class="modal-body">
     <br>
-    <textarea  [(ngModel)]="tagsStr" rows="7" cols="60" type="text" class="md-textarea" ></textarea>
+    <textarea [(ngModel)]="tagsStr" rows="7" cols="60" type="text" class="md-textarea"></textarea>
     <br>
     <div class="tags-ctnr">
       <ul class="tag-ul-list">
-        <li *ngFor="let tag of tags; let i = index" class="tag-list-item" [ngStyle]="tag >= 0?{'background-color': '#ff9999'} : {'background-color': '#b2b2ff'}" >
+        <li *ngFor="let tag of tags; let i = index" class="tag-list-item" [ngStyle]="tag >= 0?{'background-color': '#ff9999'} : {'background-color': '#b2b2ff'}">
           {{tag}}
         </li>
       </ul>
