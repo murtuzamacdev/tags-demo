@@ -9,7 +9,7 @@ export class AudioService {
 
   recordAudio = () => {
     return new Promise(resolve => {
-      navigator.mediaDevices.getUserMedia({ audio: true })
+      navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
           const mediaRecorder = new MediaRecorder(stream);
           const audioChunks = [];

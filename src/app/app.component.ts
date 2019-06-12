@@ -213,10 +213,20 @@ export class AppComponent {
   async stopRecording() {
     const audio = await this.recorder.stop();
     this.outputAudio = audio;
+    console.log(audio);
   }
 
   playRecording(){
     this.outputAudio.play();
   }
+
+  playVideo(){ // as blob 
+
+    var video = document.querySelector('video');
+   
+    var videoUrl=window.URL.createObjectURL(this.outputAudio.audioBlob);// blob.data gives actual data
+   
+    video.src = videoUrl;
+   }
 
 }
