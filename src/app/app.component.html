@@ -1,4 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
+
+<button (click)="startRecording()">Start Recording</button>
+<button (click)="stopRecording()">Stop Recording</button>
+<button (click)="playRecording()">Play Recording</button>
+<button (click)="uploadRecording()">Upload Recording</button>
+
 <meta property="video" content="https://stackoverflow.com/questions/7524585/how-do-i-get-the-information-from-a-meta-tag-with-javascript" />
 <input type="button" value="CPTURE" (click)="generatePDF()" />
 <div *ngIf="showPDF">
@@ -32,7 +38,7 @@
 </div>
 <h1 *ngIf="showPDF">{{greeting | personalize: 'Murtuza'}}</h1>
 
-<input id="textareaid111" (ngModelChange)="greeting=$event" [ngModel]="greeting | personalize: 'Murtuza'" style="width: 500px;">
+<input id="textareaid111" [ngModel]="greeting | personalize: 'Murtuza'" (ngModelChange)="onInputChange($event)"  style="width: 500px;">
 <button (click)="insertAtCaret('textareaid111', '___')" >Persnalize</button>
 <button (click)="setPersonalize()">Set Persnalize </button>
 

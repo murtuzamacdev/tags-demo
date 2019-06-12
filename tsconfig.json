@@ -10,7 +10,8 @@
     "experimentalDecorators": true,
     "target": "es5",
     "types": [
-      "node"
+      "node",
+      "dom-mediacapture-record"
     ],
     "typeRoots": [
       "node_modules/@types"

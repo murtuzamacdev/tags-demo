@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { HttpClient } from '@angular/common/http';
+import { AudioService } from 'src/app/services/audio.service'
 
 @Component({
   selector: 'app-root',
@@ -21,11 +23,28 @@ export class AppComponent {
   showPDF: boolean = false;
   links = []
 
+  recorder: any;
+  outputAudio: any;
+
   constructor(
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private http: HttpClient,
+    private audioService: AudioService
   ) { }
 
   ngOnInit() {
+
+    this.http.get('http://va1ihgdeet02.ihgext.global:8080/ics/prefs/v1/prefsdata?prefKey=new_key_4').subscribe((result) => {
+      console.log(result['prefVal'])
+      console.log(JSON.parse(result['prefVal']))
+    })
+
+    // fetch('http://va1ihgdeet02.ihgext.global:8080/ics/prefs/v1/prefsdata?prefKey=new_key').then((resp) => resp.json()) // Transform the data into json
+    // .then(function(data) {
+    //   console.log('fetch ',JSON.stringify(data))
+    //   console.log(JSON.parse(data.prefVal))
+    //   // Create and append the li's to the ul
+    //   })
 
 
     let localStorageTag = JSON.parse(localStorage.getItem('tags'));
@@ -100,8 +119,8 @@ export class AppComponent {
 
   setPersonalize() {
     console.log(this.greeting);
-    let newGreeting = this.greeting.replace(new RegExp('___', 'g'), 'Murtuza');
-    console.log(newGreeting)
+    // let newGreeting = this.greeting.replace(new RegExp('___', 'g'), 'Murtuza');
+    // console.log(newGreeting)
   }
 
   generatePDF() {
@@ -129,6 +148,7 @@ export class AppComponent {
 
   insertAtCaret(areaId, text) {
     var txtarea: any = document.getElementById(areaId);
+    txtarea.focus();
     if (!txtarea) {
       return;
     }
@@ -138,7 +158,7 @@ export class AppComponent {
     var br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ?
       "ff" : (document['selection'] ? "ie" : false));
     if (br == "ie") {
-      txtarea.focus();
+
       var range = document['selection'].createRange();
       range.moveStart('character', -txtarea.value.length);
       strPos = range.text.length;
@@ -148,22 +168,55 @@ export class AppComponent {
 
     var front = (txtarea.value).substring(0, strPos);
     var back = (txtarea.value).substring(strPos, txtarea.value.length);
-    this.greeting = front + text + back;
-    // strPos = strPos + text.length;
-    if (br == "ie") {
-      txtarea.focus();
-      var ieRange = document['selection'].createRange();
-      ieRange.moveStart('character', -txtarea.value.length);
-      ieRange.moveStart('character', strPos);
-      ieRange.moveEnd('character', 0);
-      ieRange.select();
-    } else if (br == "ff") {
-      txtarea.selectionStart = 0;
-      txtarea.selectionEnd = 5;
-      // txtarea.focus();
-    }
+    this.greeting = (front + text + back).replace(new RegExp('Murtuza', 'g'), '___');
+
+    strPos = strPos + text.length;
+
+    let cursorPos = (front + 'Murtuza').length;
+
+    setTimeout(() => {
+      if (br == "ie") {
+        txtarea.focus();
+        var ieRange = document['selection'].createRange();
+        ieRange.moveStart('character', -txtarea.value.length);
+        ieRange.moveStart('character', strPos);
+        ieRange.moveEnd('character', 0);
+        ieRange.select();
+      } else if (br == "ff") {
+        console.log(cursorPos)
+        txtarea.setSelectionRange(cursorPos, cursorPos)
+
+        // txtarea.focus();
+      }
+    }, 100)
+
+
 
     txtarea.scrollTop = scrollPos;
+  }
+
+  seeEvent(event) {
+    console.log('event', event)
+  }
+
+  onInputChange(evt) {
+    this.greeting = evt.replace(new RegExp('Murtuza', 'g'), '___')
+
+    // this.greeting = evt;
+  }
+
+  async startRecording() {
+    this.recorder = await this.audioService.recordAudio();
+    this.recorder.start();
+  }
+
+  async stopRecording() {
+    const audio = await this.recorder.stop();
+    this.outputAudio = audio;
+  }
+
+  playRecording(){
+    this.outputAudio.play();
   }
 
 }
